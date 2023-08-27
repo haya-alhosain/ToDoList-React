@@ -1,9 +1,9 @@
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 import { TodosContext } from "./components/contexts/todosContext";
+import ToastProvider from "./components/contexts/ToastContext";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
 let initialTodos = [
   {
     id: uuidv4(),
@@ -20,11 +20,14 @@ let initialTodos = [
 ];
 export default function App() {
   const [todos, setTodos] = useState(initialTodos);
+
   return (
-    <div className="App">
-      <TodosContext.Provider value={{ todos, setTodos }}>
-        <ToDoList />
-      </TodosContext.Provider>
-    </div>
+    <ToastProvider>
+      <div className="App">
+        <TodosContext.Provider value={{ todos, setTodos }}>
+          <ToDoList />
+        </TodosContext.Provider>
+      </div>
+    </ToastProvider>
   );
 }
